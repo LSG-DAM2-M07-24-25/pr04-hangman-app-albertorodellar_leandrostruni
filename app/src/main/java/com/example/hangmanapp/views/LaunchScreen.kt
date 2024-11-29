@@ -20,10 +20,10 @@ import com.example.hangmanapp.model.Routes
 import kotlinx.coroutines.delay
 
 @Composable
-fun Screen1(navController: NavController) {
+fun LaunchScreen(navController: NavController) {
     LaunchedEffect(Unit) {
         delay(3000)
-        navController.navigate(Routes.Pantalla2.route)
+        navController.navigate(Routes.MenuScreen.route)
     }
     Box(
         modifier = Modifier
@@ -43,5 +43,5 @@ fun Screen1(navController: NavController) {
 @Composable
 fun Screen1Preview() {
     val mockNavController = rememberNavController()
-    Screen1(navController = mockNavController)
+    LaunchScreen(navController = mockNavController)
 }

@@ -14,9 +14,9 @@ import com.example.hangmanapp.model.Routes
 
 
 
-/*
+
 @Composable
-fun Screen3(navController: NavController) {
+fun GameScreen(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize().background(Color.Red)
     ) {
@@ -25,7 +25,6 @@ fun Screen3(navController: NavController) {
             modifier = Modifier
                 .align(Alignment.Center)
                 .clickable
-                { navController.navigate(Routes.Pantalla1.route) })
+                { navController.navigate(Routes.LaunchScreen.route) })
     }
 }
-*/

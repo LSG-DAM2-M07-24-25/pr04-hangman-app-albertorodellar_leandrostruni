@@ -14,9 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hangmanapp.model.Routes
 import com.example.hangmanapp.ui.theme.HangmanAppTheme
-import com.example.hangmanapp.views.Screen1
-import com.example.hangmanapp.views.Screen2
-import com.example.hangmanapp.views.Screen3
+import com.example.hangmanapp.views.LaunchScreen
+import com.example.hangmanapp.views.MenuScreen
+import com.example.hangmanapp.views.GameScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +39,12 @@ fun HangManGame(modifier: Modifier){
     val navigationController = rememberNavController()
     NavHost(
         navController = navigationController,
-        startDestination = Routes.Pantalla1.route
+        startDestination = Routes.LaunchScreen.route
     ) {
-        composable(Routes.Pantalla1.route) { Screen1(navigationController) }
-        composable(Routes.Pantalla2.route) { Screen2(navigationController) }
-        composable(Routes.Pantalla3.route) { Screen3(navigationController) }
+        composable(Routes.LaunchScreen.route) { LaunchScreen(navigationController) }
+        composable(Routes.MenuScreen.route) { MenuScreen(navigationController) }
+        composable(Routes.GameScreen.route) { GameScreen(navigationController) }
+        //composable(Routes.ResultScreen.route) { ResultScreen(navigationController) }
+
     }
 }
