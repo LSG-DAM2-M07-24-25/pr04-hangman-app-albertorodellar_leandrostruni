@@ -1,4 +1,4 @@
-package com.example.hangmanapp
+package com.example.hangmanapp.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -8,20 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.hangmanapp.model.Routes
 
 @Composable
-fun Screen3(navController: NavController) {
+fun Screen2(navController: NavController) {
     Box(
-        modifier = Modifier.fillMaxSize().background(Color.Red)
+        modifier = Modifier.fillMaxSize().background(Color.Yellow)
     ) {
         Text(
-            text = "Pantalla 3",
+            text = "Pantalla 2",
             modifier = Modifier
                 .align(Alignment.Center)
                 .clickable
-                { navController.navigate(Routes.Pantalla1.route) })
+                { navController.navigate(Routes.Pantalla3.route) })
     }
 }

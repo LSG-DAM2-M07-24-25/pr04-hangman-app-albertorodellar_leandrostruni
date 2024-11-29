@@ -1,4 +1,4 @@
-package com.example.hangmanapp
+package com.example.hangmanapp.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.hangmanapp.R
+import com.example.hangmanapp.model.Routes
 import kotlinx.coroutines.delay
 
 @Composable
