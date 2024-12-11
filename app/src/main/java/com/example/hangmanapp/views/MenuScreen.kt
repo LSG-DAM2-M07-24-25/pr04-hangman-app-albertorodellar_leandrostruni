@@ -81,8 +81,16 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel = view
                 contentDescription = "Hangman Game Logo",
                 modifier = Modifier.size(200.dp)
             )
+
             Spacer(modifier = Modifier.height(48.dp))
-            DifficultyDropdown(selectedDifficulty = selectedDifficulty, onSelectionChange = { selectedDifficulty = it })
+
+            DifficultyDropdown(
+                selectedDifficulty = selectedDifficulty,
+                onSelectionChange = { selectedDifficulty = it }
+            )
+
+
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -92,7 +100,8 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel = view
                         navController.navigate(Routes.GameScreen.route)
                     },
                     enabled = selectedDifficulty.isNotEmpty(),
-                    modifier = Modifier.width(150.dp)
+                    modifier = Modifier
+                        .width(150.dp)
                         .padding(top = 32.dp)
                 ) {
                     Text(text = "Jugar")
@@ -142,10 +151,10 @@ fun HelpDialog(onDismiss: () -> Unit) {
                         )
                     }
                 }
-                Column (
+                Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
-                ){
+                ) {
                     Text(
                         text = "Cómo jugar",
                         fontSize = 36.sp,
@@ -212,12 +221,12 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
             onDismissRequest = { expanded = false },
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
-            difficulty.forEach { diff ->
+            difficulty.forEach { difficulty ->
                 DropdownMenuItem(
-                    text = { Text(text = diff, fontSize = 18.sp) },
+                    text = { Text(text = difficulty, fontSize = 18.sp) },
                     onClick = {
                         expanded = false
-                        onSelectionChange(diff)
+                        onSelectionChange(difficulty)
                     }
                 )
 

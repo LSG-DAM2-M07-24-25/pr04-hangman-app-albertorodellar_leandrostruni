@@ -22,50 +22,74 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun GameScreen(
     navController: NavController,
-    alphabetViewModel: AlphabetViewModel = viewModel(),
     gameViewModel: GameViewModel = viewModel()
 ) {
+
     val difficulty by gameViewModel.difficulty.observeAsState()
-    val alphabet by alphabetViewModel.alphabet.collectAsState()
+    val currentWord by gameViewModel.currentWord.observeAsState()
 
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Usamos el valor de 'difficulty' para mostrar alguna información relacionada
-        Text(
-            text = "Dificultad seleccionada: $difficulty",
-            fontSize = 20.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(top = 16.dp)
-        )
-        FlowRow(
-            modifier = Modifier
-                .fillMaxWidth()
+        Column (
+            modifier = Modifier.fillMaxSize()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            alphabet.forEach { letter ->
-                Button(
-                    onClick = { alphabetViewModel.onLetterClicked(letter) },
-                    enabled = !letter.pulsado,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Gray,
-                        disabledContainerColor = Color.Red
-                    ),
-                    modifier = Modifier.size(64.dp)
-                ) {
+
+            Row (
+                modifier = Modifier.padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ){
+                currentWord?.forEach(){ char ->
                     Text(
-                        text = letter.char.toString(),
-                        color = Color.White,
+                        text = char.toString(),
                         fontSize = 24.sp,
-                        textAlign = TextAlign.Center
+                        color = Color.Black,
+                        modifier = Modifier.padding(horizontal = 4.dp)
                     )
                 }
             }
+
+
+            // Usamos el valor de 'difficulty' para mostrar alguna información relacionada
+            Text(
+                text = "Dificultad seleccionada: $difficulty",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+
+/*            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                alphabet.forEach { letter ->
+                    Button(
+                        onClick = { alphabetViewModel.onLetterClicked(letter) },
+                        enabled = !letter.pulsado,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Gray,
+                            disabledContainerColor = Color.Red
+                        ),
+                        modifier = Modifier.size(64.dp)
+                    ) {
+                        Text(
+                            text = letter.char.toString(),
+                            color = Color.White,
+                            fontSize = 24.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }*/
         }
+
     }
 }
 
