@@ -1,3 +1,5 @@
+
+/*
 import androidx.lifecycle.ViewModel
 import com.example.hangmanapp.model.Letter
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,3 +24,4 @@ class AlphabetViewModel : ViewModel() {
         }
     }
 }
+*/
