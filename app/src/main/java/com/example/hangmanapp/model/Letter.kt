@@ -1,4 +1,6 @@
 package com.example.hangmanapp.model
 
-class Letter {
-}
+data class Letter(
+    val char: Char,
+    var pulsado: Boolean = false
+)
