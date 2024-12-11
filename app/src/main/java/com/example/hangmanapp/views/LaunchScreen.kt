@@ -41,7 +41,7 @@ fun LaunchScreen(navController: NavController) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun Screen1Preview() {
+fun LaunchScreenPreview() {
     val mockNavController = rememberNavController()
     LaunchScreen(navController = mockNavController)
 }
