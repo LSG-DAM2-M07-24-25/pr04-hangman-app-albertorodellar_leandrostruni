@@ -6,44 +6,44 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import AlphabetViewModel
-import GameViewModel
+import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GameScreen(
     navController: NavController,
-    gameViewModel: GameViewModel = viewModel()
+    gameViewModel: GameViewModel,
+    alphabetViewModel: AlphabetViewModel
 ) {
 
     val difficulty by gameViewModel.difficulty.observeAsState()
     val currentWord by gameViewModel.currentWord.observeAsState()
+    val alphabet by alphabetViewModel.alphabet.collectAsState()
 
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Column (
-            modifier = Modifier.fillMaxSize()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Row (
+            Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.Center
-            ){
-                currentWord?.forEach(){ char ->
+            ) {
+                currentWord?.forEach() { char ->
                     Text(
                         text = char.toString(),
                         fontSize = 24.sp,
@@ -62,7 +62,7 @@ fun GameScreen(
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-/*            FlowRow(
+            FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
@@ -87,16 +87,9 @@ fun GameScreen(
                         )
                     }
                 }
-            }*/
+            }
         }
-
     }
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun Screen3Preview() {
-    val mockNavController = rememberNavController()
-    GameScreen(navController = mockNavController)
-}

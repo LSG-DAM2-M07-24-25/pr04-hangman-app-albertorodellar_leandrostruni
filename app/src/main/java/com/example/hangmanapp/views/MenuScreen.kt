@@ -1,6 +1,6 @@
 package com.example.hangmanapp.views
 
-import GameViewModel
+import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -51,7 +51,7 @@ import com.example.hangmanapp.model.Routes
 
 
 @Composable
-fun MenuScreen(navController: NavController, gameViewModel: GameViewModel = viewModel()) {
+fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
     var selectedDifficulty by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
 

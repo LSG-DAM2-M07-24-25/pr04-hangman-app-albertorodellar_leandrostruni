@@ -1,3 +1,5 @@
+package com.example.hangmanapp.viewmodel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +24,7 @@ class GameViewModel() : ViewModel() {
         val difficultyEnum = when (_difficulty.value){
             "Fácil" -> Difficulty.EASY
             "Medio" -> Difficulty.MEDIUM
-            "Dificíl" -> Difficulty.HARD
+            "Difícil" -> Difficulty.HARD
             else -> return
         }
 

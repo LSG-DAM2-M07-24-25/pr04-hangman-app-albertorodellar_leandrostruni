@@ -1,6 +1,6 @@
 package com.example.hangmanapp.views
 
-import GameViewModel
+import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 

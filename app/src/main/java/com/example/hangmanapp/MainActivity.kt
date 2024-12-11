@@ -1,6 +1,7 @@
 package com.example.hangmanapp
 
-import GameViewModel
+import AlphabetViewModel
+import com.example.hangmanapp.viewmodel.GameViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,13 +26,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val gameViewModel: GameViewModel by viewModels<GameViewModel>()
+        val alphabetViewModel: AlphabetViewModel by viewModels<AlphabetViewModel>()
         enableEdgeToEdge()
         setContent {
             HangmanAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HangManGame(
                         modifier = Modifier.padding(innerPadding),
-                        gameViewModel = gameViewModel
+                        gameViewModel = gameViewModel,
+                        alphabetViewModel = alphabetViewModel
                     )
                 }
             }
@@ -40,7 +43,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel){
+fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel, alphabetViewModel: AlphabetViewModel){
     val navigationController = rememberNavController()
     NavHost(
         navController = navigationController,
@@ -48,7 +51,7 @@ fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel){
     ) {
         composable(Routes.LaunchScreen.route) { LaunchScreen(navigationController) }
         composable(Routes.MenuScreen.route) { MenuScreen(navigationController, gameViewModel) }
-        composable(Routes.GameScreen.route) { GameScreen(navigationController, gameViewModel) }
+        composable(Routes.GameScreen.route) { GameScreen(navigationController, gameViewModel, alphabetViewModel) }
         composable(Routes.ResultScreen.route) { ResultScreen(navigationController, gameViewModel) }
 
     }
