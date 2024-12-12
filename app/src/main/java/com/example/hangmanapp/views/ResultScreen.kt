@@ -2,7 +2,10 @@ package com.example.hangmanapp.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.magnifier
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,12 +32,19 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            Text (
+                text = "HANGMAN GAME",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
             ShowGameResults(gameResult ?: "", attempts ?: 0)
 
             Column(
@@ -47,9 +57,10 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                     },
                     modifier = Modifier
                         .width(180.dp)
-                        .padding(top = 32.dp)
+                        .padding(top = 32.dp),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Volver a jugar", fontSize = 16.sp)
+                    Text(text = "Volver a jugar", style = MaterialTheme.typography.titleMedium)
                 }
                 Button(
                     onClick = {
@@ -58,9 +69,10 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                     },
                     modifier = Modifier
                         .width(180.dp)
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Menu", fontSize = 16.sp)
+                    Text(text = "Menu", style = MaterialTheme.typography.titleMedium )
                 }
             }
         }
@@ -71,16 +83,14 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
 fun ShowGameResults(gameResult: String, attempts: Int) {
     Text(
         text = if (gameResult == "win") "!Has ganado!" else "!Has perdido!",
-        fontSize = 48.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .padding(16.dp)
     )
     Text(
         text = "Intentos restantes: $attempts",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .padding(16.dp)
