@@ -2,7 +2,9 @@ package com.example.hangmanapp.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -43,7 +45,8 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -62,7 +65,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         .padding(top = 32.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Volver a jugar", style = MaterialTheme.typography.titleMedium)
+                    Text(text = "Play Again", style = MaterialTheme.typography.titleMedium)
                 }
                 Button(
                     onClick = {
@@ -84,14 +87,14 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
 @Composable
 fun ShowGameResults(gameResult: String, attempts: Int) {
     Text(
-        text = if (gameResult == "win") "!Has ganado!" else "!Has perdido!",
+        text = if (gameResult == "win") "You won!" else "You lost!",
         style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .padding(16.dp)
     )
     Text(
-        text = "Intentos restantes: $attempts",
+        text = "Remaining Attempts: $attempts",
         style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier

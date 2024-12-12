@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -54,8 +56,9 @@ fun GameScreen(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .fillMaxWidth()
+                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             //Imagen dinámica que cambia según los intentos
@@ -87,7 +90,7 @@ fun GameScreen(
 
             // Usamos el valor de 'difficulty' para mostrar alguna información relacionada
             Text(
-                text = "Dificultad seleccionada: $difficulty",
+                text = "Difficulty: $difficulty",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier.padding(top = 16.dp)
@@ -97,7 +100,7 @@ fun GameScreen(
 
             // Mostrar intentos restantes
             Text(
-                text = "Intentos restantes: $remainingAttempts",
+                text = "Remaining Attempts: $remainingAttempts",
                 style = MaterialTheme.typography.labelLarge,
                 color = Color.Red,
                 modifier = Modifier.padding(top = 16.dp)
