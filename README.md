@@ -66,9 +66,19 @@ Adivina la palabra oculta seleccionando letras. Cada error te acerca un paso má
 
 #### 🎮 Muestra del Juego 🎮
 
-<div align="center">
-  <img src="resources/Readme-Images/hangman_demo.gif" alt="Demo del juego Hangman" width="800">
-</div>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="app/src/main/res/drawable/screenshot_1.png" alt="Captura 1" width="200"/>
+      <p>Captura 1</p>
+    </td>
+    <td width="100"></td> <!-- Celda vacía para espacio -->
+    <td align="center">
+      <img src="app/src/main/res/drawable/screenshot_2.png" alt="Captura 2" width="200"/>
+      <p>Captura 2</p>
+    </td>
+  </tr>
+</table>
 
 </br>
 
