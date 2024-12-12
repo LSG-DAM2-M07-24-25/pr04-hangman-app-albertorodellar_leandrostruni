@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import AlphabetViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import com.example.hangmanapp.viewmodel.GameViewModel
@@ -24,8 +23,7 @@ import com.example.hangmanapp.model.Routes
 @Composable
 fun GameScreen(
     navController: NavController,
-    gameViewModel: GameViewModel,
-    alphabetViewModel: AlphabetViewModel
+    gameViewModel: GameViewModel
 ) {
 
     val difficulty by gameViewModel.difficulty.observeAsState()
@@ -33,7 +31,6 @@ fun GameScreen(
     val hiddenWord by gameViewModel.hiddenWord.observeAsState()
     val remainingAttempts by gameViewModel.remainingAttempts.observeAsState()
     val gameResult by gameViewModel.gameResult.observeAsState()
-    val alphabet by alphabetViewModel.alphabet.collectAsState()
     val currentImage by gameViewModel.currentImage.observeAsState()
 
     if(gameResult != null){
@@ -118,9 +115,6 @@ fun LetterButtons(gameViewModel: GameViewModel) {
             ) {
                 row.forEach { letter ->
                     val state = letterState[letter]
-
-
-
                     println("Letra: $letter, Estado: $state")
                     Button(
                         onClick = { gameViewModel.onLetterSelected(letter) },

@@ -184,7 +184,7 @@ fun HelpDialog(onDismiss: () -> Unit) {
 @Composable
 fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("Fácil", "Medio", "Difícil")
+    val difficulty = listOf("Facil", "Medio", "Dificil")
 
     Box(
         modifier = Modifier

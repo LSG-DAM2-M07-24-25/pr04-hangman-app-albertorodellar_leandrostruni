@@ -43,6 +43,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                 Button(
                     onClick = {
                         navController.navigate(Routes.GameScreen.route)
+                        gameViewModel.playAgain(again = true)
                     },
                     modifier = Modifier
                         .width(180.dp)
@@ -51,7 +52,10 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                     Text(text = "Volver a jugar", fontSize = 16.sp)
                 }
                 Button(
-                    onClick = { navController.navigate(Routes.MenuScreen.route) },
+                    onClick = {
+                        navController.navigate(Routes.MenuScreen.route)
+                        gameViewModel.playAgain(again = false)
+                    },
                     modifier = Modifier
                         .width(180.dp)
                         .padding(top = 8.dp)
@@ -66,7 +70,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
 @Composable
 fun ShowGameResults(gameResult: String, attempts: Int) {
     Text(
-        text = if (gameResult == "win") "Has ganado!" else "Has perdido!",
+        text = if (gameResult == "win") "!Has ganado!" else "!Has perdido!",
         fontSize = 48.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
