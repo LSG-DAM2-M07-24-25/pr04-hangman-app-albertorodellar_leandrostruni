@@ -77,7 +77,7 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                 textAlign = TextAlign.Center
             )
             Image(
-                painter = painterResource(id = R.drawable.hangman_game),
+                painter = painterResource(id = R.drawable.hagman_logo),
                 contentDescription = "Hangman Game Logo",
                 modifier = Modifier.size(200.dp)
             )

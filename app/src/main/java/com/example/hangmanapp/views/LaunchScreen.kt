@@ -28,13 +28,13 @@ fun LaunchScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.Black),
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.hangman_game),
+            painter = painterResource(id = R.drawable.hagman_logo),
             contentDescription = "Hangman Game Logo",
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(300.dp)
         )
     }
 }

@@ -41,7 +41,8 @@ fun GameScreen(
 
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -50,8 +51,8 @@ fun GameScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //Mostrar palabra oculta
 
+            //Mostrar palabra oculta
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.Center
