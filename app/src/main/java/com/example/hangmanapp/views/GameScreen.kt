@@ -118,15 +118,17 @@ fun GameScreen(
 @Composable
 fun LetterButtons(gameViewModel: GameViewModel) {
     val letterState by gameViewModel.letterStates.observeAsState(initial = mapOf())
+    val chunkSize = 6 //Botonones por fila
 
 
     Column(
         modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ('A'..'Z').chunked(6).forEach { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = if (row.size < 6) Arrangement.Center else Arrangement.SpaceEvenly
+                horizontalArrangement = if (row.size < chunkSize) Arrangement.Center else Arrangement.SpaceEvenly
             ) {
                 row.forEach { letter ->
                     val state = letterState[letter]
@@ -152,7 +154,7 @@ fun LetterButtons(gameViewModel: GameViewModel) {
                     ) {
                         Text(
                             text = letter.toString(),
-                            style = MaterialTheme.typography.bodyLarge
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 }

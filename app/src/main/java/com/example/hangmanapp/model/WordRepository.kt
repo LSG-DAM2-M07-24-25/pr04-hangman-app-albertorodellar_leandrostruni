@@ -8,10 +8,9 @@ package com.example.hangmanapp.model
 class WordRepository {
     private val words = mapOf(
         Difficulty.EASY to listOf(
-            "java", "html", "css", "sql", "json",
-            "ajax", "perl", "bash", "node", "ruby",
-            "go", "vue", "sass", "yaml", "api",
-            "dart", "nx", "pug", "zsh", "flask"
+            "java", "html", "bash", "json", "perl",
+            "ajax", "ruby", "node", "vue", "sass",
+            "yaml", "dart", "pug", "zsh", "flask"
         ),
         Difficulty.MEDIUM to listOf(
             "kotlin", "laravel", "django", "angular", "reactjs",
