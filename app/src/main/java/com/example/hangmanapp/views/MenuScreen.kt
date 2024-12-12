@@ -139,6 +139,14 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
     }
 }
 
+/**
+ * Diálogo que muestra la ayuda del juego.
+ *
+ * Esta función presenta un diálogo informativo que explica las reglas del juego Hangman. El jugador
+ * puede cerrar el diálogo haciendo clic en el ícono de cierre.
+ *
+ * @param onDismiss Función que se ejecuta cuando el diálogo se cierra.
+ */
 @Composable
 fun HelpDialog(onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
@@ -196,7 +204,15 @@ fun HelpDialog(onDismiss: () -> Unit) {
     }
 }
 
-
+/**
+ * Menú desplegable para seleccionar la dificultad del juego.
+ *
+ * Esta función crea un menú desplegable con las opciones de dificultad (Fácil, Medio, Difícil). El jugador
+ * puede seleccionar una opción que se almacenará en el estado `selectedDifficulty`.
+ *
+ * @param selectedDifficulty El valor actual de la dificultad seleccionada por el jugador.
+ * @param onSelectionChange Función que se ejecuta cuando el jugador selecciona una nueva dificultad.
+ */
 @Composable
 fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
