@@ -9,19 +9,19 @@ class WordRepository {
     private val words = mapOf(
         Difficulty.EASY to listOf(
             "java", "html", "bash", "json", "perl",
-            "ajax", "ruby", "node", "vue", "sass",
-            "yaml", "dart", "pug", "zsh", "flask"
+            "ajax", "ruby", "node", "ssh", "sass",
+            "yaml", "dart", "xampp", "crm", "flask"
         ),
         Difficulty.MEDIUM to listOf(
             "kotlin", "laravel", "django", "angular", "reactjs",
-            "express", "flutter", "android", "backend", "frontend",
-            "webpack", "graphql", "docker", "mongodb", "sqlite",
-            "swiftui", "electron", "firebase", "netlify", "tailwind"
+            "thread", "flutter", "android", "backend", "frontend",
+            "webpack", "github", "docker", "mongodb", "sqlite",
+            "swiftui", "encrypt", "firebase", "netlify", "tailwind"
         ),
         Difficulty.HARD to listOf(
             "javascript", "typescript", "frameworks", "microservice", "architecture",
             "intelligence", "debugging", "deserialization", "observability", "refactoring",
-            "optimization", "virtualization", "kubernetes", "orchestration", "machinelearning",
+            "optimization", "virtualization", "kubernetes", "collection", "machinelearning",
             "scalability", "programming", "fullstack", "devops", "containerization"
         )
     )
