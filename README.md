@@ -8,10 +8,6 @@ Adivina las palabras antes de quedarte sin intentos y disfruta del diseño retro
 
 </br>
 
-
-
-</br>
-
 ---
 
 </br>
@@ -85,7 +81,8 @@ Adivina la palabra oculta seleccionando letras. Cada error te acerca un paso má
 <p align="center">
   
 El proyecto está estructurado siguiendo la arquitectura MVVM (Model-View-ViewModel), facilitando la separación de lógica, datos y UI.  
-</p><br>
+</p>
+<br>
 
 <p align="center">
   
@@ -116,47 +113,60 @@ El proyecto está estructurado siguiendo la arquitectura MVVM (Model-View-ViewMo
 
 </br>
 
-<div align="center">
-<img alt="Kotlin" src="https://img.icons8.com/color/48/000000/kotlin.png" width="80"/>
-<img alt="Jetpack Compose" src="https://img.icons8.com/color/48/000000/android-os.png" width="80"/>
-<img alt="Android Studio" src="https://img.icons8.com/color/48/000000/android-studio--v2.png" width="80"/>
-</div>
+<img alt="github" src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png" width="80"/>  
+<img alt="androidstudio" src="https://user-images.githubusercontent.com/25181517/192108895-20dc3343-43e3-4a54-a90e-13a4abbc57b9.png" width="80"/>
+<img alt="android" src="https://user-images.githubusercontent.com/25181517/117269608-b7dcfb80-ae58-11eb-8e66-6cc8753553f0.png" width="80"/>
+<img alt="kotlin" src="https://user-images.githubusercontent.com/25181517/185062810-7ee0c3d2-17f2-4a98-9d8a-a9576947692b.png" width="80"/>
+
+<br>
 
 ---
 
 </br>
 
 ### Integrantes del equipo: 
-<br>
-<div>
-  <img src="resources/Readme-Images/CodeCraftersLogo.png" alt="Logo Code Crafters" width="300">
-</div>
-<br>
+<p>
+  Alberto Rodellar,
+  Leandro Struni</br>
+</p>
 
-<table>
-  <tr>
-    <td align="center">
-        <img src= "resources/Readme-Images/Alice.png" alt="Mini Alice" width="80"></td>
-      <td align="center">
-        <img src= "resources/Readme-Images/Bob.png" alt="Mini Bob" width="80"></td>
-      <td align="center">
-        <img src= "resources/Readme-Images/Charlie.png" alt="Mini Charlie" width="80"></td>
-  </tr>
+<table align="center">
   <tr>
     <td>
-      <a href="https://github.com/AliceDev">
-        <img src="https://img.shields.io/badge/Alice-Git?style=flat&logo=github&logoColor=white&labelColor=black&color=50e520&label=GitHub" alt="Badge">
-      </a>
+      <table align="center">
+        <tr>
+          <td align="center">
+            <a href="https://github.com/LeanEmanuel">
+              <img src="https://github.com/LeanEmanuel/Images/blob/main/Leandro.png" alt="Mini Leandro" width="80">
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://github.com/LeanEmanuel">
+              <img src="https://img.shields.io/badge/LeanEmanuel-Git?style=flat&logo=github&logoColor=white&labelColor=black&color=50e520&label=GitHub" alt="Badge">
+            </a>
+          </td>
+        </tr>
+      </table>
     </td>
     <td>
-       <a href="https://github.com/BobDev">
-      <img src="https://img.shields.io/badge/Bob-Git?style=flat&logo=github&logoColor=white&labelColor=black&color=50e520&label=GitHub" alt="Badge">
-         </a>
-    </td>
-    <td>
-      <a href="https://github.com/CharlieDev">
-      <img src="https://img.shields.io/badge/Charlie-Git?style=flat&logo=github&logoColor=white&labelColor=black&color=50e520&label=GitHub" alt="Badge">
-      </a>
+      <table align="center">
+        <tr>
+          <td align="center">
+            <a href="https://github.com/AlbertoRodellar">
+              <img src="https://media.tenor.com/33I1sOQI3V4AAAAi/heimerdinger.gif" alt="Gif" width="80">
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://github.com/AlbertoRodellar">
+              <img src="https://img.shields.io/badge/AlbertoRodellar-Git?style=flat&logo=github&logoColor=white&labelColor=black&color=50e520&label=GitHub" alt="Badge">
+            </a>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 </table>
