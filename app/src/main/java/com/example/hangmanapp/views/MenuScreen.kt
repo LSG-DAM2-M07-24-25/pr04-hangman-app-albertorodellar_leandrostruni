@@ -85,13 +85,12 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                 modifier = Modifier.size(400.dp)
             )
 
-            Spacer(modifier = Modifier.height(42.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             DifficultyDropdown(
                 selectedDifficulty = selectedDifficulty,
                 onSelectionChange = { selectedDifficulty = it }
             )
-
 
 
             Column(

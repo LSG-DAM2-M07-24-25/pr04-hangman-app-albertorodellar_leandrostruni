@@ -31,7 +31,8 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
+            .padding(16.dp)
     ) {
         Text(
             text = "HANGMAN GAME",
@@ -41,15 +42,18 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                 .padding(top = 16.dp)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+
 
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .align(Alignment.Center)
-                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(top = 64.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             ShowGameResults(gameResult ?: "", (attempts?.takeIf { it >= 0 } ?: 0))
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -63,7 +67,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         .padding(top = 32.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Volver a jugar", style = MaterialTheme.typography.titleMedium)
+                    Text(text = "Volver a jugar", style = MaterialTheme.typography.bodyLarge)
                 }
                 Button(
                     onClick = {
@@ -75,7 +79,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         .padding(top = 8.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Menu", style = MaterialTheme.typography.titleMedium)
+                    Text(text = "Menu", style = MaterialTheme.typography.bodyLarge)
                 }
             }
         }
