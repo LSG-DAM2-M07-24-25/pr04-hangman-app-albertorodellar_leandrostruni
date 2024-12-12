@@ -25,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -58,7 +59,7 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -68,25 +69,30 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                 text = "HANGMAN",
                 fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = "GAME",
                 fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Image(
                 painter = painterResource(id = R.drawable.hagman_logo),
                 contentDescription = "Hangman Game Logo",
                 modifier = Modifier.size(400.dp)
             )
+
             Spacer(modifier = Modifier.height(42.dp))
 
             DifficultyDropdown(
                 selectedDifficulty = selectedDifficulty,
                 onSelectionChange = { selectedDifficulty = it }
             )
+
+
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -99,7 +105,11 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                     enabled = selectedDifficulty.isNotEmpty(),
                     modifier = Modifier
                         .width(150.dp)
-                        .padding(top = 32.dp)
+                        .padding(top = 32.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
                 ) {
                     Text(text = "Jugar")
                 }
@@ -107,7 +117,11 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                     onClick = { showDialog = true },
                     modifier = Modifier
                         .width(150.dp)
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
                 ) {
                     Text(text = "Ayuda")
                 }
@@ -120,73 +134,6 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
     }
 }
 
-/**
- * Desplegable para seleccionar la dificultad del juego. Muestra las opciones "Fácil", "Medio" y "Difícil".
- * Permite al jugador elegir la dificultad antes de comenzar el juego.
- *
- * @param selectedDifficulty La dificultad seleccionada actualmente.
- * @param onSelectionChange Función que se llama cuando el jugador selecciona una dificultad diferente.
- */
-@Composable
-fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -> Unit) {
-    var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("Facil", "Medio", "Dificil")
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 48.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = Color(0xFFF1F1F1),
-                    shape = RoundedCornerShape(12.dp)
-                )
-                .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
-                .clickable { expanded = !expanded }
-                .padding(vertical = 12.dp, horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = selectedDifficulty.ifEmpty { "Selecciona la dificultad" },
-                color = Color.Black,
-                modifier = Modifier.weight(1f),
-                fontSize = 18.sp
-            )
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = "Arrow down",
-                modifier = Modifier.size(24.dp)
-            )
-        }
-
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxWidth(0.8f)
-        ) {
-            difficulty.forEach { difficulty ->
-                DropdownMenuItem(
-                    text = { Text(text = difficulty, fontSize = 18.sp) },
-                    onClick = {
-                        expanded = false
-                        onSelectionChange(difficulty)
-                    }
-                )
-
-            }
-        }
-    }
-}
-
-/**
- * Muestra un diálogo con las instrucciones sobre cómo jugar el juego. El diálogo puede ser cerrado
- * haciendo clic en el icono de cerrar en la esquina superior derecha.
- *
- * @param onDismiss Función que se llama cuando el diálogo se cierra.
- */
 @Composable
 fun HelpDialog(onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
@@ -239,6 +186,61 @@ fun HelpDialog(onDismiss: () -> Unit) {
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    val difficulty = listOf("Facil", "Medio", "Dificil")
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 48.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
+                .clickable { expanded = !expanded }
+                .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = selectedDifficulty.ifEmpty { "Selecciona la dificultad" },
+                color = Color.Black,
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowDown,
+                contentDescription = "Arrow down",
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth(0.8f)
+        ) {
+            difficulty.forEach { difficulty ->
+                DropdownMenuItem(
+                    text = { Text(text = difficulty, style = MaterialTheme.typography.bodyLarge) },
+                    onClick = {
+                        expanded = false
+                        onSelectionChange(difficulty)
+                    }
+                )
+
             }
         }
     }

@@ -33,10 +33,18 @@ class GameViewModel() : ViewModel() {
     val currentImage: LiveData<Int> = _currentImage
 
 
+    /**
+     * Inicializa el estado del ViewModel.
+     *
+     * - Llama a `resetLetterStates()` para asegurar que el estado de las letras
+     *   esté correctamente inicializado al iniciar el ViewModel.
+     */
     init {
         resetLetterStates()
     }
 
+    
+    //lista con las imagenes
     private val images = listOf(
         R.drawable.hangman_image_0, //Imagen inicial
         R.drawable.hangman_image_1,
@@ -108,7 +116,7 @@ class GameViewModel() : ViewModel() {
         if (isCorrect) {
             word.forEachIndexed { index, char ->
                 if (char.equals(letter, ignoreCase = true)) {
-                    hidden[index] = char
+                    hidden[index] = char.uppercaseChar()
                 }
             }
         }else{
@@ -120,6 +128,7 @@ class GameViewModel() : ViewModel() {
 
         //Actualizar imagen de fondo
         updateImage()
+
         //Actualiza el estado de la letra seleccionada
         letterStates[letter.uppercaseChar()] = isCorrect
         _letterStates.value = letterStates.toMap()
@@ -131,23 +140,44 @@ class GameViewModel() : ViewModel() {
             _gameResult.value = "win"
         }
 
-        // Log para depuración
+        //Log para depuración
         println("Estado de las letras actualizado: $letterStates")
     }
 
-    //Método para actualizar la imagen
+
+    /**
+     * Actualiza la imagen actual del juego según los intentos restantes.
+     *
+     * La imagen se selecciona de la lista `images` basándose en el número de intentos usados.
+     * Si el índice está fuera de rango, se utiliza una imagen predeterminada.
+     */
     private fun updateImage() {
         val remaining = _remainingAttempts.value ?: 6
         _currentImage.value = images.getOrElse(6 - remaining) { R.drawable.hangman_image_0 }
     }
 
-    //Reinicia intentos del jugador e imagen
+
+    /**
+     * Restablece el contador de intentos y la imagen del juego a sus valores iniciales.
+     *
+     * - Los intentos se reinician a 6.
+     * - La imagen se establece en la imagen inicial.
+     */
     private fun resetAttempts() {
         _remainingAttempts.value = 6
         _currentImage.value = R.drawable.hangman_image_0
     }
 
-    //Reinicia estado del juego, again para cargar o no una nueva palabra
+
+    /**
+     * Reinicia el estado del juego para una nueva partida.
+     *
+     * - Restablece el estado de las letras seleccionadas.
+     * - Reinicia los intentos y la imagen inicial.
+     * - Si `again` es `true`, carga una nueva palabra aleatoria.
+     *
+     * @param again Indica si se debe iniciar una nueva partida con una palabra aleatoria.
+     */
     fun playAgain(again: Boolean){
         resetLetterStates()
         resetAttempts()

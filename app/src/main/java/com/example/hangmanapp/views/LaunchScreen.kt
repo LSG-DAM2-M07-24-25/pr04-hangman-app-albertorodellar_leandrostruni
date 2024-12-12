@@ -34,7 +34,7 @@ fun LaunchScreen(navController: NavController) {
         Image(
             painter = painterResource(id = R.drawable.hagman_logo),
             contentDescription = "Hangman Game Logo",
-            modifier = Modifier.size(300.dp)
+            modifier = Modifier.size(400.dp)
         )
     }
 }

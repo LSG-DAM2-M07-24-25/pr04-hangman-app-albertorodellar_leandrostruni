@@ -31,8 +31,20 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
             .fillMaxSize()
             .background(Color.White)
     ) {
+        Text(
+            text = "HANGMAN GAME",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Column(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ShowGameResults(gameResult ?: "", (attempts?.takeIf { it >= 0 } ?: 0))
@@ -46,9 +58,10 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                     },
                     modifier = Modifier
                         .width(180.dp)
-                        .padding(top = 32.dp)
+                        .padding(top = 32.dp),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Volver a jugar", fontSize = 16.sp)
+                    Text(text = "Volver a jugar", style = MaterialTheme.typography.titleMedium)
                 }
                 Button(
                     onClick = {
@@ -57,9 +70,10 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                     },
                     modifier = Modifier
                         .width(180.dp)
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Menu", fontSize = 16.sp)
+                    Text(text = "Menu", style = MaterialTheme.typography.titleMedium)
                 }
             }
         }
@@ -77,16 +91,14 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
 fun ShowGameResults(gameResult: String, attempts: Int) {
     Text(
         text = if (gameResult == "win") "!Has ganado!" else "!Has perdido!",
-        fontSize = 48.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .padding(16.dp)
     )
     Text(
         text = "Intentos restantes: $attempts",
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier
             .padding(16.dp)
