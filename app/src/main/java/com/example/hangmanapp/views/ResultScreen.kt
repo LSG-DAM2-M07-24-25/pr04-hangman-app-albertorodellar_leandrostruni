@@ -35,8 +35,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
             modifier = Modifier.align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ShowGameResults(gameResult ?: "", attempts ?: 0)
-
+            ShowGameResults(gameResult ?: "", (attempts?.takeIf { it >= 0 } ?: 0))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -67,6 +66,13 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
     }
 }
 
+/**
+ * Muestra los resultados del juego, ya sea que el jugador haya ganado o perdido,
+ * junto con los intentos restantes.
+ *
+ * @param gameResult El resultado del juego ("win" o "lose").
+ * @param attempts El número de intentos restantes del jugador. Si es negativo o nulo, se establece en 0.
+ */
 @Composable
 fun ShowGameResults(gameResult: String, attempts: Int) {
     Text(
