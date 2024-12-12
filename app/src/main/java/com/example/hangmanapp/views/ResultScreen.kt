@@ -41,7 +41,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 16.dp)
+                .padding(top = 32.dp)
         )
 
 
