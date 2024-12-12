@@ -9,3 +9,7 @@ import com.example.hangmanapp.R
 val PixelifySans = FontFamily(
     Font(R.font.pixelifysan_variablefont_wght, FontWeight.Normal)
 )
+
+val PressStart2P = FontFamily(
+    Font(R.font.press_start2p_regular, FontWeight.Normal)
+)

@@ -3,8 +3,29 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.hangmanapp.ui.theme.PixelifySans
+import com.example.hangmanapp.ui.theme.PressStart2P
+
 
 val PixelTypography = Typography(
+    bodyLarge = TextStyle(
+        fontFamily = PressStart2P,
+        fontWeight = FontWeight.Normal,
+        fontSize = 144.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = PressStart2P,
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = PressStart2P,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    )
+)
+
+
+/*val PixelTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = PixelifySans,
         fontWeight = FontWeight.Normal,
@@ -20,8 +41,7 @@ val PixelTypography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     )
-
-)
+)*/
 
     /*
     val Typography = Typography(
