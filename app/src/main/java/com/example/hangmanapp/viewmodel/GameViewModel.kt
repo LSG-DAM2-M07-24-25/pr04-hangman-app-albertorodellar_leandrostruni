@@ -82,9 +82,9 @@ class GameViewModel() : ViewModel() {
      */
     private fun loadRandomWord() {
         val difficultyEnum = when (_difficulty.value) {
-            "Facil" -> Difficulty.EASY
-            "Medio" -> Difficulty.MEDIUM
-            "Dificil" -> Difficulty.HARD
+            "Easy" -> Difficulty.EASY
+            "Medium" -> Difficulty.MEDIUM
+            "Hard" -> Difficulty.HARD
             else -> return
         }
 

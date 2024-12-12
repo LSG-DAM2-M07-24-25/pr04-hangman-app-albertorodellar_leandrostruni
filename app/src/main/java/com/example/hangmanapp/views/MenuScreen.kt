@@ -20,7 +20,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -62,8 +64,10 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
             .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.align(Alignment.Center)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = "HANGMAN",
@@ -109,8 +113,9 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                         containerColor = MaterialTheme.colorScheme.primary,
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Jugar")
+                    Text(text = "Play")
                 }
                 Button(
                     onClick = { showDialog = true },
@@ -120,9 +125,10 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
                         contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
+                    ),
+                    shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Ayuda")
+                    Text(text = "Help")
                 }
                 // Si pulsa el boton muestra el dialog
                 if (showDialog) {
@@ -140,7 +146,7 @@ fun HelpDialog(onDismiss: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(4.dp),
         ) {
             Column(
                 modifier = Modifier
@@ -167,8 +173,7 @@ fun HelpDialog(onDismiss: () -> Unit) {
                 ) {
                     Text(
                         text = "Cómo jugar",
-                        fontSize = 36.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                 }
@@ -183,7 +188,8 @@ fun HelpDialog(onDismiss: () -> Unit) {
                             "8. Si el dibujo del ahorcado se completa antes de que adivines la palabra, pierdes el juego.\n\n" +
                             "¡Sigue intentándolo y diviértete mientras mejoras tu habilidad para adivinar palabras!",
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }
@@ -194,7 +200,7 @@ fun HelpDialog(onDismiss: () -> Unit) {
 @Composable
 fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    val difficulty = listOf("Facil", "Medio", "Dificil")
+    val difficulty = listOf("Easy", "Medium", "Hard")
 
     Box(
         modifier = Modifier
@@ -208,13 +214,13 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
                     color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(12.dp)
                 )
-                .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
+                .border(2.dp, Color.Black, RoundedCornerShape(4.dp))
                 .clickable { expanded = !expanded }
                 .padding(vertical = 12.dp, horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = selectedDifficulty.ifEmpty { "Selecciona la dificultad" },
+                text = selectedDifficulty.ifEmpty { "Difficulty" },
                 color = Color.Black,
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.bodyLarge
@@ -233,7 +239,7 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
         ) {
             difficulty.forEach { difficulty ->
                 DropdownMenuItem(
-                    text = { Text(text = difficulty, style = MaterialTheme.typography.bodyLarge) },
+                    text = { Text(text = difficulty, style = MaterialTheme.typography.bodyMedium) },
                     onClick = {
                         expanded = false
                         onSelectionChange(difficulty)
