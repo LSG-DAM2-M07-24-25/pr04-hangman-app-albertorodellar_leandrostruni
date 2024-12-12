@@ -1,6 +1,5 @@
 package com.example.hangmanapp
 
-import AlphabetViewModel
 import com.example.hangmanapp.viewmodel.GameViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,15 +25,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val gameViewModel: GameViewModel by viewModels<GameViewModel>()
-        val alphabetViewModel: AlphabetViewModel by viewModels<AlphabetViewModel>()
         enableEdgeToEdge()
         setContent {
             HangmanAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HangManGame(
                         modifier = Modifier.padding(innerPadding),
-                        gameViewModel = gameViewModel,
-                        alphabetViewModel = alphabetViewModel
+                        gameViewModel = gameViewModel
                     )
                 }
             }
@@ -43,7 +40,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel, alphabetViewModel: AlphabetViewModel){
+fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel){
     val navigationController = rememberNavController()
     NavHost(
         navController = navigationController,
@@ -51,7 +48,7 @@ fun HangManGame(modifier: Modifier, gameViewModel: GameViewModel, alphabetViewMo
     ) {
         composable(Routes.LaunchScreen.route) { LaunchScreen(navigationController) }
         composable(Routes.MenuScreen.route) { MenuScreen(navigationController, gameViewModel) }
-        composable(Routes.GameScreen.route) { GameScreen(navigationController, gameViewModel, alphabetViewModel) }
+        composable(Routes.GameScreen.route) { GameScreen(navigationController, gameViewModel) }
         composable(Routes.ResultScreen.route) { ResultScreen(navigationController, gameViewModel) }
 
     }

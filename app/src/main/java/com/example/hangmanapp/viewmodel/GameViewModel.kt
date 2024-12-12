@@ -74,9 +74,9 @@ class GameViewModel() : ViewModel() {
      */
     private fun loadRandomWord() {
         val difficultyEnum = when (_difficulty.value) {
-            "Fácil" -> Difficulty.EASY
+            "Facil" -> Difficulty.EASY
             "Medio" -> Difficulty.MEDIUM
-            "Difícil" -> Difficulty.HARD
+            "Dificil" -> Difficulty.HARD
             else -> return
         }
 
@@ -139,5 +139,18 @@ class GameViewModel() : ViewModel() {
     private fun updateImage() {
         val remaining = _remainingAttempts.value ?: 6
         _currentImage.value = images.getOrElse(6 - remaining) { R.drawable.hangman_image_0 }
+    }
+
+    private fun resetAttempts() {
+        _remainingAttempts.value = 6
+        _currentImage.value = R.drawable.hangman_image_0
+    }
+
+    fun playAgain(again: Boolean){
+        resetLetterStates()
+        resetAttempts()
+        if (again){
+            loadRandomWord()
+        }
     }
 }
