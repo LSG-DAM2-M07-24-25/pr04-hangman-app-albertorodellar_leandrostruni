@@ -2,7 +2,6 @@ package com.example.hangmanapp.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -11,11 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.ui.Modifier
@@ -34,17 +30,23 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
+        Text(
+            text = "HANGMAN GAME",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Column(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Text (
-                text = "HANGMAN GAME",
-                style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
             ShowGameResults(gameResult ?: "", attempts ?: 0)
 
             Column(
@@ -72,7 +74,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         .padding(top = 8.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
-                    Text(text = "Menu", style = MaterialTheme.typography.titleMedium )
+                    Text(text = "Menu", style = MaterialTheme.typography.titleMedium)
                 }
             }
         }

@@ -9,15 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hangmanapp.model.Routes
 
 
@@ -29,13 +25,12 @@ fun GameScreen(
 ) {
 
     val difficulty by gameViewModel.difficulty.observeAsState()
-    val currentWord by gameViewModel.currentWord.observeAsState()
     val hiddenWord by gameViewModel.hiddenWord.observeAsState()
     val remainingAttempts by gameViewModel.remainingAttempts.observeAsState()
     val gameResult by gameViewModel.gameResult.observeAsState()
     val currentImage by gameViewModel.currentImage.observeAsState()
 
-    if(gameResult != null){
+    if (gameResult != null) {
         LaunchedEffect(Unit) {
             navController.navigate(Routes.ResultScreen.route)
         }
@@ -49,19 +44,20 @@ fun GameScreen(
         contentAlignment = Alignment.Center
     ) {
 
+        Text(
+            text = "HANGMAN GAME",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text (
-                text = "HANGMAN GAME",
-                style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             //Imagen dinámica que cambia según los intentos
             currentImage?.let { imageRes ->
                 Image(
@@ -123,7 +119,7 @@ fun LetterButtons(gameViewModel: GameViewModel) {
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-    ){
+    ) {
         ('A'..'Z').chunked(6).forEach { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
