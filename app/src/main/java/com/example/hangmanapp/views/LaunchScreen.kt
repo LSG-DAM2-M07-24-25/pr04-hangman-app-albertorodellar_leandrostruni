@@ -20,28 +20,28 @@ import com.example.hangmanapp.model.Routes
 import kotlinx.coroutines.delay
 
 @Composable
-fun Screen1(navController: NavController) {
+fun LaunchScreen(navController: NavController) {
     LaunchedEffect(Unit) {
         delay(3000)
-        navController.navigate(Routes.Pantalla2.route)
+        navController.navigate(Routes.MenuScreen.route)
     }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.Black),
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.hangman_game),
+            painter = painterResource(id = R.drawable.hagman_logo),
             contentDescription = "Hangman Game Logo",
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(300.dp)
         )
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun Screen1Preview() {
+fun LaunchScreenPreview() {
     val mockNavController = rememberNavController()
-    Screen1(navController = mockNavController)
+    LaunchScreen(navController = mockNavController)
 }

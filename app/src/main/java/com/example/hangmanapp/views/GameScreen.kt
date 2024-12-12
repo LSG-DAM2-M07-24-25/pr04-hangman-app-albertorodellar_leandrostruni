@@ -1,71 +1,148 @@
 package com.example.hangmanapp.views
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.hangmanapp.R
+import AlphabetViewModel
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import com.example.hangmanapp.viewmodel.GameViewModel
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hangmanapp.model.Routes
 
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Screen3(navController: NavController) {
+fun GameScreen(
+    navController: NavController,
+    gameViewModel: GameViewModel,
+    alphabetViewModel: AlphabetViewModel
+) {
+
+    val difficulty by gameViewModel.difficulty.observeAsState()
+    val currentWord by gameViewModel.currentWord.observeAsState()
+    val hiddenWord by gameViewModel.hiddenWord.observeAsState()
+    val remainingAttempts by gameViewModel.remainingAttempts.observeAsState()
+    val gameResult by gameViewModel.gameResult.observeAsState()
+    val alphabet by alphabetViewModel.alphabet.collectAsState()
+    val currentImage by gameViewModel.currentImage.observeAsState()
+
+    if(gameResult != null){
+        LaunchedEffect(Unit) {
+            navController.navigate(Routes.ResultScreen.route)
+        }
+    }
+
+
     Box(
         modifier = Modifier.fillMaxSize()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
+
+            // Imagen dinámica
+            currentImage?.let { imageRes ->
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = "Hangman Progress",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(bottom = 16.dp)
+                )
+            }
+
+            //Mostrar palabra oculta
+            Row(
+                modifier = Modifier.padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                hiddenWord?.forEach() { char ->
+                    Text(
+                        text = char.toString(),
+                        fontSize = 24.sp,
+                        color = Color.Black,
+                        modifier = Modifier.padding(horizontal = 4.dp)
+                    )
+                }
+            }
+
+
+            // Usamos el valor de 'difficulty' para mostrar alguna información relacionada
             Text(
-                text = "Game Screen",
-                modifier = Modifier
-                    .clickable
-                    { navController.navigate(Routes.Pantalla1.route) })
-            Image(
-                painter = painterResource(id = R.drawable.hangman_game),
-                contentDescription = "Hangman Game Logo",
-                modifier = Modifier.size(250.dp)
+                text = "Dificultad seleccionada: $difficulty",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(top = 16.dp)
             )
 
+            // Mostrar intentos restantes
+            Text(
+                text = "Intentos restantes: $remainingAttempts",
+                fontSize = 20.sp,
+                color = Color.Red,
+                modifier = Modifier.padding(top = 16.dp)
+            )
 
-            LetterButton()
-
+            //Botones con las letras
+            LetterButtons(gameViewModel)
 
         }
-
     }
 }
 
 @Composable
-fun LetterButton() {
-    Button(
-        onClick = { /*TODO*/ }
-    ) {
-        Text(text = "A")
+fun LetterButtons(gameViewModel: GameViewModel) {
+    val letterState by gameViewModel.letterStates.observeAsState(initial = mapOf())
+
+
+    Column {
+        ('A'..'Z').chunked(5).forEach { row ->
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                row.forEach { letter ->
+                    val state = letterState[letter]
+
+
+
+                    println("Letra: $letter, Estado: $state")
+                    Button(
+                        onClick = { gameViewModel.onLetterSelected(letter) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = when (state) {
+                                true -> Color.Green //Letra Correcta
+                                false -> Color.Red //Letra Incorrecta
+                                null -> Color.Gray //Letra sin seleccionar
+                            },
+                            disabledContainerColor = when (state) {
+                                true -> Color.Green.copy(alpha = 0.5f) //Mantener verde si es correcta
+                                false -> Color.Red.copy(alpha = 0.5f)  //Mantener rojo si es incorrecta
+                                else -> Color.Gray.copy(alpha = 0.5f)  //Mantener gris si está deshabilitada sin selección
+                            }
+                        ),
+                        enabled = state == null
+                    ) {
+                        Text(text = letter.toString())
+                    }
+                }
+            }
+        }
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun Screen3Preview() {
-    val mockNavController = rememberNavController()
-    Screen3(navController = mockNavController)
-}
