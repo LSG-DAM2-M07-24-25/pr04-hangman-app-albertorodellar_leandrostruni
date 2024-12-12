@@ -34,7 +34,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(16.dp)
+            .padding(top = 64.dp)
     ) {
         Text(
             text = "HANGMAN GAME",
@@ -43,12 +43,8 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                 .align(Alignment.TopCenter)
                 .padding(top = 32.dp)
         )
-
-
-
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .align(Alignment.Center)
                 .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .verticalScroll(rememberScrollState()),
@@ -66,7 +62,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         gameViewModel.playAgain(again = true)
                     },
                     modifier = Modifier
-                        .width(180.dp)
+                        .wrapContentWidth()
                         .padding(top = 32.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
@@ -78,7 +74,7 @@ fun ResultScreen(navController: NavController, gameViewModel: GameViewModel) {
                         gameViewModel.playAgain(again = false)
                     },
                     modifier = Modifier
-                        .width(180.dp)
+                        .wrapContentWidth()
                         .padding(top = 8.dp),
                     shape = RoundedCornerShape(4.dp),
                 ) {
