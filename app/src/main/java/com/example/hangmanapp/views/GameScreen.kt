@@ -8,11 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import AlphabetViewModel
+import androidx.compose.foundation.background
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -64,37 +66,50 @@ fun GameScreen(
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-            FlowRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            //Botones con las letras
+            LetterButtons(gameViewModel)
+
+        }
+    }
+}
+
+@Composable
+fun LetterButtons(gameViewModel: GameViewModel) {
+    val letterState by gameViewModel.letterStates.observeAsState(initial = mapOf())
+
+
+    Column {
+        ('A'..'Z').chunked(5).forEach { row ->
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                alphabet.forEach { letter ->
+                row.forEach { letter ->
+                    val state = letterState[letter]
+
+
+
+                    println("Letra: $letter, Estado: $state")
                     Button(
-                        onClick = {
-                            alphabetViewModel.onLetterClicked(letter)
-                            gameViewModel.onLetterSelected(letter.char)
-                                  },
-                        enabled = !letter.pulsado,
+                        onClick = { gameViewModel.onLetterSelected(letter) },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Gray,
-                            disabledContainerColor = Color.Red
+                            containerColor = when (state) {
+                                true -> Color.Green //Letra Correcta
+                                false -> Color.Red //Letra Incorrecta
+                                null -> Color.Gray //Letra sin seleccionar
+                            },
+                            disabledContainerColor = when (state) {
+                                true -> Color.Green.copy(alpha = 0.5f) //Mantener verde si es correcta
+                                false -> Color.Red.copy(alpha = 0.5f)  //Mantener rojo si es incorrecta
+                                else -> Color.Gray.copy(alpha = 0.5f)  //Mantener gris si está deshabilitada sin selección
+                            }
                         ),
-                        modifier = Modifier.size(64.dp)
+                        enabled = state == null
                     ) {
-                        Text(
-                            text = letter.char.toString(),
-                            color = Color.White,
-                            fontSize = 24.sp,
-                            textAlign = TextAlign.Center
-                        )
+                        Text(text = letter.toString())
                     }
                 }
             }
         }
     }
 }
-
 
