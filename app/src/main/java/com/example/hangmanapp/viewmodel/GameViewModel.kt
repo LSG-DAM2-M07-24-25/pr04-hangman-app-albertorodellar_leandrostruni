@@ -141,11 +141,13 @@ class GameViewModel() : ViewModel() {
         _currentImage.value = images.getOrElse(6 - remaining) { R.drawable.hangman_image_0 }
     }
 
+    //Reinicia intentos del jugador e imagen
     private fun resetAttempts() {
         _remainingAttempts.value = 6
         _currentImage.value = R.drawable.hangman_image_0
     }
 
+    //Reinicia estado del juego, again para cargar o no una nueva palabra
     fun playAgain(again: Boolean){
         resetLetterStates()
         resetAttempts()
