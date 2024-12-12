@@ -24,6 +24,13 @@ val PixelTypography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 30.sp
     ),
+
+    titleMedium = TextStyle(
+        fontFamily = PressStart2P,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
+    ),
+
     labelLarge = TextStyle(
         fontFamily = PressStart2P,
         fontWeight = FontWeight.Normal,

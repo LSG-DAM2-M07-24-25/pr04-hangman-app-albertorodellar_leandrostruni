@@ -1,5 +1,6 @@
 package com.example.hangmanapp.views
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -9,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -41,16 +43,24 @@ fun GameScreen(
 
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text (
+                text = "HANGMAN GAME",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             //Imagen dinámica que cambia según los intentos
             currentImage?.let { imageRes ->
@@ -59,7 +69,6 @@ fun GameScreen(
                     contentDescription = "Hangman Progress",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp)
                         .padding(bottom = 16.dp)
                 )
             }
@@ -72,8 +81,8 @@ fun GameScreen(
                 hiddenWord?.forEach() { char ->
                     Text(
                         text = char.toString(),
-                        fontSize = 24.sp,
-                        color = Color.Black,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSecondary,
                         modifier = Modifier.padding(horizontal = 4.dp)
                     )
                 }
@@ -83,18 +92,22 @@ fun GameScreen(
             // Usamos el valor de 'difficulty' para mostrar alguna información relacionada
             Text(
                 text = "Dificultad seleccionada: $difficulty",
-                fontSize = 20.sp,
-                color = Color.Black,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier.padding(top = 16.dp)
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Mostrar intentos restantes
             Text(
                 text = "Intentos restantes: $remainingAttempts",
-                fontSize = 20.sp,
+                style = MaterialTheme.typography.labelLarge,
                 color = Color.Red,
                 modifier = Modifier.padding(top = 16.dp)
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             //Botones con las letras
             LetterButtons(gameViewModel)
@@ -108,10 +121,13 @@ fun LetterButtons(gameViewModel: GameViewModel) {
     val letterState by gameViewModel.letterStates.observeAsState(initial = mapOf())
 
 
-    Column {
-        ('A'..'Z').chunked(5).forEach { row ->
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+    ){
+        ('A'..'Z').chunked(6).forEach { row ->
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = if (row.size < 6) Arrangement.Center else Arrangement.SpaceEvenly
             ) {
                 row.forEach { letter ->
                     val state = letterState[letter]
@@ -122,17 +138,23 @@ fun LetterButtons(gameViewModel: GameViewModel) {
                             containerColor = when (state) {
                                 true -> Color.Green //Letra Correcta
                                 false -> Color.Red //Letra Incorrecta
-                                null -> Color.Gray //Letra sin seleccionar
+                                null -> MaterialTheme.colorScheme.surface //Letra sin seleccionar
                             },
                             disabledContainerColor = when (state) {
                                 true -> Color.Green.copy(alpha = 0.5f) //Mantener verde si es correcta
                                 false -> Color.Red.copy(alpha = 0.5f)  //Mantener rojo si es incorrecta
-                                else -> Color.Gray.copy(alpha = 0.5f)  //Mantener gris si está deshabilitada sin selección
+                                else -> MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                             }
                         ),
-                        enabled = state == null
+                        shape = RoundedCornerShape(4.dp),
+                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
+                        enabled = state == null,
+                        modifier = Modifier.padding(4.dp)
                     ) {
-                        Text(text = letter.toString())
+                        Text(
+                            text = letter.toString(),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
                     }
                 }
             }

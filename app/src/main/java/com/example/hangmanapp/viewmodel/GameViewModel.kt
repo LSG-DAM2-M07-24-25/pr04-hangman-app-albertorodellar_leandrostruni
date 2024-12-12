@@ -108,7 +108,7 @@ class GameViewModel() : ViewModel() {
         if (isCorrect) {
             word.forEachIndexed { index, char ->
                 if (char.equals(letter, ignoreCase = true)) {
-                    hidden[index] = char
+                    hidden[index] = char.uppercaseChar()
                 }
             }
         }else{
@@ -120,6 +120,7 @@ class GameViewModel() : ViewModel() {
 
         //Actualizar imagen de fondo
         updateImage()
+
         //Actualiza el estado de la letra seleccionada
         letterStates[letter.uppercaseChar()] = isCorrect
         _letterStates.value = letterStates.toMap()
@@ -131,7 +132,7 @@ class GameViewModel() : ViewModel() {
             _gameResult.value = "win"
         }
 
-        // Log para depuración
+        //Log para depuración
         println("Estado de las letras actualizado: $letterStates")
     }
 
