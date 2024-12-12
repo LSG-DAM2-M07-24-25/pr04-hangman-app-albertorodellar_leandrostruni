@@ -10,8 +10,6 @@ Adivina las palabras antes de quedarte sin intentos y disfruta del diseño retro
 
 ---
 
-</br>
-
 ### **Descripción funcional del juego**
 
 </br>
@@ -50,8 +48,6 @@ Adivina la palabra oculta seleccionando letras. Cada error te acerca un paso má
 
 ---
 
-</br>
-
 ### **✨ Características Principales:**
 
 <p align="center">
@@ -64,7 +60,7 @@ Adivina la palabra oculta seleccionando letras. Cada error te acerca un paso má
 </p>
 <br>
 
-#### 🎮 Muestra del Juego 🎮
+### 🎮 Muestra del Juego 🎮
 
 <table align="center">
   <tr>
