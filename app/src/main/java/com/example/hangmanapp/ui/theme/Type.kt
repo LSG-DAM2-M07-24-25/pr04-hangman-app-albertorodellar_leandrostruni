@@ -10,8 +10,15 @@ val PixelTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = PressStart2P,
         fontWeight = FontWeight.Normal,
-        fontSize = 144.sp
+        fontSize = 14.sp
     ),
+
+    bodyMedium = TextStyle(
+        fontFamily = PressStart2P,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    ),
+
     titleLarge = TextStyle(
         fontFamily = PressStart2P,
         fontWeight = FontWeight.Bold,
@@ -22,6 +29,7 @@ val PixelTypography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     )
+
 )
 
 

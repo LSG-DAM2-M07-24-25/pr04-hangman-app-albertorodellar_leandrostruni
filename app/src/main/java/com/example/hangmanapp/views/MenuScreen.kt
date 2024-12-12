@@ -1,10 +1,12 @@
 package com.example.hangmanapp.views
 
+import android.mtp.MtpEvent
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.content.contentReceiver
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +27,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -58,7 +62,7 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -68,13 +72,15 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                 text = "HANGMAN",
                 fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = "GAME",
                 fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary
             )
             Image(
                 painter = painterResource(id = R.drawable.hagman_logo),
@@ -102,7 +108,11 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                     enabled = selectedDifficulty.isNotEmpty(),
                     modifier = Modifier
                         .width(150.dp)
-                        .padding(top = 32.dp)
+                        .padding(top = 32.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
                 ) {
                     Text(text = "Jugar")
                 }
@@ -110,7 +120,11 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
                     onClick = { showDialog = true },
                     modifier = Modifier
                         .width(150.dp)
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
                 ) {
                     Text(text = "Ayuda")
                 }
@@ -195,7 +209,7 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = Color(0xFFF1F1F1),
+                    color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(12.dp)
                 )
                 .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
@@ -207,7 +221,7 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
                 text = selectedDifficulty.ifEmpty { "Selecciona la dificultad" },
                 color = Color.Black,
                 modifier = Modifier.weight(1f),
-                fontSize = 18.sp
+                style = MaterialTheme.typography.bodyLarge
             )
             Icon(
                 imageVector = Icons.Default.KeyboardArrowDown,
@@ -223,7 +237,7 @@ fun DifficultyDropdown(selectedDifficulty: String, onSelectionChange: (String) -
         ) {
             difficulty.forEach { difficulty ->
                 DropdownMenuItem(
-                    text = { Text(text = difficulty, fontSize = 18.sp) },
+                    text = { Text(text = difficulty, style = MaterialTheme.typography.bodyLarge) },
                     onClick = {
                         expanded = false
                         onSelectionChange(difficulty)
