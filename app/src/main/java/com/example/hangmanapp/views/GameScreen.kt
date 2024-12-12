@@ -55,14 +55,14 @@ fun GameScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // Imagen dinámica
+            //Imagen dinámica que cambia según los intentos
             currentImage?.let { imageRes ->
                 Image(
                     painter = painterResource(id = imageRes),
                     contentDescription = "Hangman Progress",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(300.dp)
                         .padding(bottom = 16.dp)
                 )
             }

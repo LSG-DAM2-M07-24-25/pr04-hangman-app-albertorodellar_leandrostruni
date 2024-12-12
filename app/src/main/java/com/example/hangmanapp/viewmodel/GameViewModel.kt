@@ -39,12 +39,12 @@ class GameViewModel() : ViewModel() {
 
     private val images = listOf(
         R.drawable.hangman_image_0, //Imagen inicial
-        R.drawable.hangman_image_0,
-        R.drawable.hangman_image_0,
-        R.drawable.hangman_image_0,
-        R.drawable.hangman_image_0,
-        R.drawable.hangman_image_0,
-        R.drawable.hangman_image_0 //Imagen final
+        R.drawable.hangman_image_1,
+        R.drawable.hangman_image_2,
+        R.drawable.hangman_image_3,
+        R.drawable.hangman_image_4,
+        R.drawable.hangman_image_5,
+        R.drawable.hangman_image_6 //Imagen final
     )
 
 
