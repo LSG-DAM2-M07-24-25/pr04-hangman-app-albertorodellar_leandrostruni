@@ -66,23 +66,23 @@ fun MenuScreen(navController: NavController, gameViewModel: GameViewModel) {
         ) {
             Text(
                 text = "HANGMAN",
-                fontSize = 48.sp,
+                fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
             Text(
                 text = "GAME",
-                fontSize = 48.sp,
+                fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
             Image(
                 painter = painterResource(id = R.drawable.hagman_logo),
                 contentDescription = "Hangman Game Logo",
-                modifier = Modifier.size(200.dp)
+                modifier = Modifier.size(400.dp)
             )
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(42.dp))
 
             DifficultyDropdown(
                 selectedDifficulty = selectedDifficulty,
