@@ -3,6 +3,7 @@ package com.example.hangmanapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.hangmanapp.R
 import com.example.hangmanapp.model.Difficulty
 import com.example.hangmanapp.model.WordRepository
 
@@ -28,9 +29,23 @@ class GameViewModel() : ViewModel() {
     private val _gameResult = MutableLiveData<String?>() //Resultado del juego (win/lose)
     val gameResult: LiveData<String?> = _gameResult
 
+    private val _currentImage = MutableLiveData(R.drawable.hangman_image_0)
+    val currentImage: LiveData<Int> = _currentImage
+
+
     init {
         resetLetterStates()
     }
+
+    private val images = listOf(
+        R.drawable.hangman_image_0, //Imagen inicial
+        R.drawable.hangman_image_0,
+        R.drawable.hangman_image_0,
+        R.drawable.hangman_image_0,
+        R.drawable.hangman_image_0,
+        R.drawable.hangman_image_0,
+        R.drawable.hangman_image_0 //Imagen final
+    )
 
 
     /**
@@ -103,6 +118,8 @@ class GameViewModel() : ViewModel() {
             }
         }
 
+        //Actualizar imagen de fondo
+        updateImage()
         //Actualiza el estado de la letra seleccionada
         letterStates[letter.uppercaseChar()] = isCorrect
         _letterStates.value = letterStates.toMap()
@@ -116,5 +133,11 @@ class GameViewModel() : ViewModel() {
 
         // Log para depuración
         println("Estado de las letras actualizado: $letterStates")
+    }
+
+    //Método para actualizar la imagen
+    private fun updateImage() {
+        val remaining = _remainingAttempts.value ?: 6
+        _currentImage.value = images.getOrElse(6 - remaining) { R.drawable.hangman_image_0 }
     }
 }

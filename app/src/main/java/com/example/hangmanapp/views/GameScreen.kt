@@ -8,10 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import AlphabetViewModel
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import com.example.hangmanapp.viewmodel.GameViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +34,7 @@ fun GameScreen(
     val remainingAttempts by gameViewModel.remainingAttempts.observeAsState()
     val gameResult by gameViewModel.gameResult.observeAsState()
     val alphabet by alphabetViewModel.alphabet.collectAsState()
+    val currentImage by gameViewModel.currentImage.observeAsState()
 
     if(gameResult != null){
         LaunchedEffect(Unit) {
@@ -51,6 +54,18 @@ fun GameScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            // Imagen dinámica
+            currentImage?.let { imageRes ->
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = "Hangman Progress",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(bottom = 16.dp)
+                )
+            }
 
             //Mostrar palabra oculta
             Row(
