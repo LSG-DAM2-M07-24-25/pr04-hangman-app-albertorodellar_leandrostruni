@@ -22,6 +22,12 @@ class GameViewModel() : ViewModel() {
     private val _letterStates = MutableLiveData<Map<Char, Boolean?>>()
     val letterStates: LiveData<Map<Char, Boolean?>> = _letterStates
 
+    private val _remainingAttempts = MutableLiveData(6) //Contador de intentos
+    val remainingAttempts: LiveData<Int> = _remainingAttempts
+
+    private val _gameResult = MutableLiveData<String?>() //Resultado del juego (win/lose)
+    val gameResult: LiveData<String?> = _gameResult
+
     init {
         resetLetterStates()
     }
@@ -62,6 +68,8 @@ class GameViewModel() : ViewModel() {
         val word = wordRepository.getWords(difficultyEnum).random()
         _currentWord.value = word.toCharArray().toList()
         _hiddenWord.value = word.map { '_' }
+        _remainingAttempts.value = 6
+        _gameResult.value = null
     }
 
     /**
@@ -88,6 +96,11 @@ class GameViewModel() : ViewModel() {
                     hidden[index] = char
                 }
             }
+        }else{
+            _remainingAttempts.value = (_remainingAttempts.value ?: 1) -1
+            if (_remainingAttempts.value == 0){
+                _gameResult.value  = "lose"
+            }
         }
 
         //Actualiza el estado de la letra seleccionada
@@ -95,6 +108,11 @@ class GameViewModel() : ViewModel() {
         _letterStates.value = letterStates.toMap()
 
         _hiddenWord.value = hidden //Actualizar LiveData
+
+        //Verifica si todas las letras están descubiertas
+        if (!hidden.contains('_')) {
+            _gameResult.value = "win"
+        }
 
         // Log para depuración
         println("Estado de las letras actualizado: $letterStates")

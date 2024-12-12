@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.hangmanapp.model.Routes
 
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -28,7 +29,15 @@ fun GameScreen(
     val difficulty by gameViewModel.difficulty.observeAsState()
     val currentWord by gameViewModel.currentWord.observeAsState()
     val hiddenWord by gameViewModel.hiddenWord.observeAsState()
+    val remainingAttempts by gameViewModel.remainingAttempts.observeAsState()
+    val gameResult by gameViewModel.gameResult.observeAsState()
     val alphabet by alphabetViewModel.alphabet.collectAsState()
+
+    if(gameResult != null){
+        LaunchedEffect(Unit) {
+            navController.navigate(Routes.ResultScreen.route)
+        }
+    }
 
 
     Box(
@@ -63,6 +72,14 @@ fun GameScreen(
                 text = "Dificultad seleccionada: $difficulty",
                 fontSize = 20.sp,
                 color = Color.Black,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+
+            // Mostrar intentos restantes
+            Text(
+                text = "Intentos restantes: $remainingAttempts",
+                fontSize = 20.sp,
+                color = Color.Red,
                 modifier = Modifier.padding(top = 16.dp)
             )
 
