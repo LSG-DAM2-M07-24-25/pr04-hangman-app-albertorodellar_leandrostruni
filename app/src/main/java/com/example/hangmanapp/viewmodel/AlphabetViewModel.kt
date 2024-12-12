@@ -16,6 +16,7 @@ class AlphabetViewModel : ViewModel() {
         _alphabet.value = ('A'..'Z').map { Letter(it) }
     }
 
+
     fun onLetterClicked(letter: Letter) {
         _alphabet.value = _alphabet.value.map {
             if (it.char == letter.char) it.copy(pulsado = !it.pulsado) else it

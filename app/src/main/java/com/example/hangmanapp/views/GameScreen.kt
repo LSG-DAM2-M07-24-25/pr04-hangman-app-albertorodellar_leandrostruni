@@ -25,6 +25,7 @@ fun GameScreen(
 
     val difficulty by gameViewModel.difficulty.observeAsState()
     val currentWord by gameViewModel.currentWord.observeAsState()
+    val hiddenWord by gameViewModel.hiddenWord.observeAsState()
     val alphabet by alphabetViewModel.alphabet.collectAsState()
 
 
@@ -38,12 +39,13 @@ fun GameScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            //Mostrar palabra oculta
 
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
-                currentWord?.forEach() { char ->
+                hiddenWord?.forEach() { char ->
                     Text(
                         text = char.toString(),
                         fontSize = 24.sp,
@@ -71,7 +73,10 @@ fun GameScreen(
             ) {
                 alphabet.forEach { letter ->
                     Button(
-                        onClick = { alphabetViewModel.onLetterClicked(letter) },
+                        onClick = {
+                            alphabetViewModel.onLetterClicked(letter)
+                            gameViewModel.onLetterSelected(letter.char)
+                                  },
                         enabled = !letter.pulsado,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Gray,
